@@ -6,6 +6,8 @@ import SharedLayout from '../SharedLayout/SharedLayout';
 const HomePage = lazy(() => import('pages/home'));
 const TracksPage = lazy(() => import('pages/tracks'));
 const AlbumsPage = lazy(() => import('pages/albums'));
+const TrackInfoPage = lazy(() => import('pages/trackInfo'));
+const CreateTrackPage = lazy(() => import('pages/createTrack'));
 
 function App() {
   return (
@@ -13,8 +15,10 @@ function App() {
       <Routes>
         <Route path={routesPath.home} element={<SharedLayout />}>
           <Route index element={<HomePage />} />
-          <Route path={routesPath.tracks} element={<TracksPage />} />
           <Route path={routesPath.albums} element={<AlbumsPage />} />
+          <Route path={routesPath.tracks} element={<TracksPage />} />
+          <Route path={routesPath.trackInfo} element={<TrackInfoPage />} />
+          <Route path={routesPath.create} element={<CreateTrackPage />} />
         </Route>
       </Routes>
     </div>

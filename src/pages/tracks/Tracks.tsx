@@ -1,9 +1,12 @@
+import { FC } from 'react';
+import { useNavigate } from 'react-router-dom';
 import { Box, Button, Card, Grid } from '@mui/material';
 import TrackList from 'components/TrackList';
-import React from 'react';
 import { ITrack } from 'types/tracks';
+import { routesPath } from 'config';
 
-const Tracks = () => {
+const Tracks: FC = () => {
+  const navigate = useNavigate();
   const tracks: ITrack[] = [
     {
       id: '1',
@@ -12,7 +15,7 @@ const Tracks = () => {
       text: 'Black and white days',
       listeners: 3,
       audio: 'audio/be43bff6-8279-44cc-b564-d11f2500dd73.jpeg',
-      picture: 'image/46d9e9c1-8d55-4e56-9ea5-4798ada4dfe4.jpg',
+      picture: 'image/10239fb6-9cca-4620-b9e9-d1b687225477.jpeg',
       comments: [],
     },
   ];
@@ -23,7 +26,9 @@ const Tracks = () => {
           <Box p={2}>
             <Grid container justifyContent="space-between">
               <h2>Tracks list</h2>
-              <Button onClick={() => {}}>Download</Button>
+              <Button onClick={() => navigate(routesPath.create)}>
+                Download
+              </Button>
             </Grid>
           </Box>
           <TrackList tracks={tracks} />

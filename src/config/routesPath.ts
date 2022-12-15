@@ -1,5 +1,7 @@
 export const routesPath = {
   home: '/',
-  tracks: '/tracks',
   albums: '/albums',
+  tracks: '/tracks',
+  trackInfo: '/tracks/:id',
+  create: '/create',
 };
