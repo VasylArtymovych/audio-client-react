@@ -17,7 +17,7 @@ const TrackInfo: FC = () => {
   };
 
   return (
-    <Container sx={{ pt: '5rem' }}>
+    <Container sx={{ p: '5rem 0' }}>
       <Button onClick={() => navigate('/tracks')}>Back to list</Button>
       <Grid container style={{ margin: '20px 0' }}>
         <img
