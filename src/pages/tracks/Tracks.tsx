@@ -4,6 +4,7 @@ import { Box, Button, Card, Grid } from '@mui/material';
 import TrackList from 'components/TrackList';
 import { ITrack } from 'types/tracks';
 import { routesPath } from 'config';
+// import { useAppSelector } from 'hooks/redux';
 
 const Tracks: FC = () => {
   const navigate = useNavigate();
@@ -14,7 +15,7 @@ const Tracks: FC = () => {
       artist: 'Amatory',
       text: 'Black and white days',
       listeners: 3,
-      audio: 'audio/be43bff6-8279-44cc-b564-d11f2500dd73.jpeg',
+      audio: 'audio/f764ef41-94d1-4d51-8a89-23a2cfd44876.mp3',
       picture: 'image/10239fb6-9cca-4620-b9e9-d1b687225477.jpeg',
       comments: [],
     },

@@ -1,19 +1,28 @@
-import { FC } from 'react';
+import React, { FC } from 'react';
 import { Grid, IconButton } from '@mui/material';
 import { Delete, Pause, PlayArrow } from '@mui/icons-material';
 import { ITrack } from 'types/tracks';
 import { StyledCard } from './TrackItem.styled';
 import { useNavigate } from 'react-router-dom';
+import { setActiveTrack } from 'store/reducers';
+import { useAppDispatch } from 'hooks';
 
 interface TrackItemProps {
   track: ITrack;
   active?: boolean;
 }
 const TrackItem: FC<TrackItemProps> = ({ track, active = false }) => {
+  const dispatch = useAppDispatch();
   const navigate = useNavigate();
+
+  const onPlay = (e: React.SyntheticEvent) => {
+    e.stopPropagation();
+    dispatch(setActiveTrack(track));
+  };
+
   return (
     <StyledCard onClick={() => navigate(`/tracks/${track.id}`)}>
-      <IconButton onClick={(e) => e.stopPropagation()}>
+      <IconButton onClick={onPlay}>
         {active ? <Pause /> : <PlayArrow />}
       </IconButton>
       <img
