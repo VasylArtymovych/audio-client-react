@@ -34,7 +34,8 @@ const Player = () => {
         audio.ontimeupdate = () => {
           dispatch(setCurrentTime(Math.ceil(audio.currentTime)));
         };
-        play();
+        dispatch(playTrack());
+        audio.play();
       }
     }
   }, [active, dispatch, volume]);
