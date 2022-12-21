@@ -1,11 +1,11 @@
 export interface IComment {
-  id: string;
+  _id: string;
   username: string;
   text: string;
 }
 
 export interface ITrack {
-  id: string;
+  _id: string;
   name: string;
   artist: string;
   text: string;
@@ -13,4 +13,12 @@ export interface ITrack {
   picture: string;
   audio: string;
   comments: IComment[];
+}
+
+type LoadingType = 'idle' | 'pending' | 'succeeded' | 'failed';
+
+export interface ITracksState {
+  tracks: ITrack[];
+  isLoading: LoadingType;
+  error: string;
 }

@@ -1,20 +1,29 @@
-import { FC } from 'react';
+import { FC, useEffect, useState } from 'react';
+import axios from 'axios';
 import { Button, Container, Grid, TextField } from '@mui/material';
 import { ITrack } from 'types/tracks';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
+import { host } from 'config';
+import { useInput } from 'hooks';
 
 const TrackInfo: FC = () => {
+  const [track, setTrack] = useState<ITrack | null>(null);
   const navigate = useNavigate();
-  const track: ITrack = {
-    id: '1',
-    name: 'Treck1',
-    artist: 'Amatory',
-    text: 'Black and white days',
-    listeners: 3,
-    audio: 'audio/be43bff6-8279-44cc-b564-d11f2500dd73.jpeg',
-    picture: 'image/10239fb6-9cca-4620-b9e9-d1b687225477.jpeg',
-    comments: [],
-  };
+  const username = useInput('');
+  const comment = useInput('');
+  const { id } = useParams();
+  useEffect(() => {
+    axios
+      .get<ITrack>(host + 'tracks/' + id)
+      .then(({ data }) => {
+        setTrack(data);
+      })
+      .catch((error) => console.log('load track error', error));
+  }, [id]);
+
+  if (!track) {
+    return null;
+  }
 
   return (
     <Container sx={{ p: '5rem 0' }}>
@@ -36,17 +45,19 @@ const TrackInfo: FC = () => {
       <p>{track.text}</p>
       <h2>Comments</h2>
       <Grid container>
-        <TextField label="Your name" fullWidth />
-        <TextField label="Comment" fullWidth multiline rows={4} />
+        <TextField {...username} label="Your name" fullWidth />
+        <TextField {...comment} label="Comment" fullWidth multiline rows={4} />
         <Button>Send</Button>
       </Grid>
       <div>
-        {track.comments.map((comment) => (
-          <div key={comment.id}>
-            <div>Author - {comment.username}</div>
-            <div>Comment - {comment.text}</div>
-          </div>
-        ))}
+        {track.comments.map((comment) => {
+          return (
+            <div key={comment._id}>
+              <div>Author - {comment.username}</div>
+              <div>Comment - {comment.text}</div>
+            </div>
+          );
+        })}
       </div>
     </Container>
   );

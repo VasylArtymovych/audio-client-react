@@ -21,7 +21,7 @@ const TrackItem: FC<TrackItemProps> = ({ track, active = false }) => {
   };
 
   return (
-    <StyledCard onClick={() => navigate(`/tracks/${track.id}`)}>
+    <StyledCard onClick={() => navigate(`/tracks/${track._id}`)}>
       <IconButton onClick={onPlay}>
         {active ? <Pause /> : <PlayArrow />}
       </IconButton>

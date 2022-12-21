@@ -12,7 +12,7 @@ const TrackList: FC<ITrackListProps> = ({ tracks }) => {
     <Grid container direction="column">
       <Box p={2}>
         {tracks.map((track) => (
-          <TrackItem key={track.id} track={track} />
+          <TrackItem track={track} key={track._id} />
         ))}
       </Box>
     </Grid>

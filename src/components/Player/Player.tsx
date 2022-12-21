@@ -1,4 +1,4 @@
-import React, { ChangeEvent, useEffect } from 'react';
+import { ChangeEvent, useEffect } from 'react';
 import { Grid, IconButton } from '@mui/material';
 import { Pause, PlayArrow, VolumeUp } from '@mui/icons-material';
 import TrackProgress from 'components/TrackProgress';
@@ -14,7 +14,7 @@ import {
 import { playerSelector } from 'store';
 import { host } from 'config';
 
-let audio: HTMLAudioElement;
+let audio: HTMLAudioElement = new Audio();
 
 const Player = () => {
   const { currentTime, duration, active, volume, pause } =
@@ -22,23 +22,19 @@ const Player = () => {
   const dispatch = useAppDispatch();
 
   useEffect(() => {
-    if (!audio) {
-      audio = new Audio();
-    } else {
-      if (active) {
-        audio.src = host + active.audio;
-        audio.volume = volume / 100;
-        audio.onloadedmetadata = () => {
-          dispatch(setDuration(Math.ceil(audio.duration)));
-        };
-        audio.ontimeupdate = () => {
-          dispatch(setCurrentTime(Math.ceil(audio.currentTime)));
-        };
-        dispatch(playTrack());
-        audio.play();
-      }
+    if (active) {
+      audio.src = host + active.audio;
+      audio.volume = 0.5;
+      audio.onloadedmetadata = () => {
+        dispatch(setDuration(Math.ceil(audio.duration)));
+      };
+      audio.ontimeupdate = () => {
+        dispatch(setCurrentTime(Math.ceil(audio.currentTime)));
+      };
+      dispatch(playTrack());
+      audio.play();
     }
-  }, [active, dispatch, volume]);
+  }, [active, dispatch]);
 
   const play = () => {
     if (pause) {

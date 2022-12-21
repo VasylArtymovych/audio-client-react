@@ -8,9 +8,13 @@ interface FileUploadProps {
 
 const FileUpload: FC<FileUploadProps> = ({ setFile, accept, children }) => {
   const inputRef = useRef<HTMLInputElement>(null);
+
   const onChangeHandler = (e: ChangeEvent<HTMLInputElement>) => {
-    console.log(e.target.files);
+    if (e.target.files) {
+      setFile(e.target.files[0]);
+    }
   };
+
   return (
     <div
       onClick={() => {
