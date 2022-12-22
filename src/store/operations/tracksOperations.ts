@@ -1,16 +1,27 @@
 import { createAsyncThunk } from '@reduxjs/toolkit';
-import axios from 'axios';
+import { trackApi } from 'services';
 import { ITrack } from 'types/tracks';
 
 export const fetchTracks = createAsyncThunk<ITrack[]>(
   'tracks/getTracks',
   async (_, thunkApi) => {
     try {
-      const response = await axios.get('tracks');
-
-      return response.data;
+      const tracks = await trackApi.getAllTracks();
+      return tracks;
     } catch (error: any) {
       return thunkApi.rejectWithValue(error.message);
+    }
+  }
+);
+
+export const fetchTrackInfo = createAsyncThunk(
+  'tracks/getTrackById',
+  async (id: string, { rejectWithValue }) => {
+    try {
+      const track = await trackApi.getTrackById(id);
+      return track;
+    } catch (err: any) {
+      return rejectWithValue(err.message);
     }
   }
 );

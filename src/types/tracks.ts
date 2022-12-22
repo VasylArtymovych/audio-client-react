@@ -19,6 +19,7 @@ type LoadingType = 'idle' | 'pending' | 'succeeded' | 'failed';
 
 export interface ITracksState {
   tracks: ITrack[];
+  trackInfo: ITrack | null;
   isLoading: LoadingType;
   error: string;
 }
