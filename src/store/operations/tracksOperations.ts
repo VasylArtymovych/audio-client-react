@@ -20,8 +20,20 @@ export const fetchTrackInfo = createAsyncThunk(
     try {
       const track = await trackApi.getTrackById(id);
       return track;
-    } catch (err: any) {
-      return rejectWithValue(err.message);
+    } catch (error: any) {
+      return rejectWithValue(error.message);
+    }
+  }
+);
+
+export const deleteTrack = createAsyncThunk(
+  'tracks/deleteTrack',
+  async (id: string, { rejectWithValue }) => {
+    try {
+      const res = await trackApi.deleteTrackById(id);
+      return res.id;
+    } catch (error: any) {
+      return rejectWithValue(error.message);
     }
   }
 );

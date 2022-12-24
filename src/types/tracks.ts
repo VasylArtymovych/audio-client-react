@@ -2,6 +2,13 @@ export interface IComment {
   _id: string;
   username: string;
   text: string;
+  trackId: string;
+}
+
+export interface ICommentDto {
+  username: string;
+  text: string;
+  trackId: string;
 }
 
 export interface ITrack {
@@ -22,4 +29,9 @@ export interface ITracksState {
   trackInfo: ITrack | null;
   isLoading: LoadingType;
   error: string;
+}
+
+export interface IDeleteTrackResponse {
+  message: string;
+  id: string;
 }

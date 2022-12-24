@@ -6,6 +6,7 @@ import { StyledCard } from './TrackItem.styled';
 import { useNavigate } from 'react-router-dom';
 import { setActiveTrack } from 'store/reducers';
 import { useAppDispatch } from 'hooks';
+import { deleteTrack } from 'store/operations';
 
 interface TrackItemProps {
   track: ITrack;
@@ -18,6 +19,11 @@ const TrackItem: FC<TrackItemProps> = ({ track, active = false }) => {
   const onPlay = (e: React.SyntheticEvent) => {
     e.stopPropagation();
     dispatch(setActiveTrack(track));
+  };
+
+  const onDeleteTrack = (e: React.SyntheticEvent) => {
+    e.stopPropagation();
+    dispatch(deleteTrack(track._id));
   };
 
   return (
@@ -40,10 +46,7 @@ const TrackItem: FC<TrackItemProps> = ({ track, active = false }) => {
         <div style={{ fontSize: 12, color: 'grey' }}>{track.artist}</div>
       </Grid>
       {active && <div>02:42 / 03:22</div>}
-      <IconButton
-        style={{ marginLeft: 'auto' }}
-        onClick={(e) => e.stopPropagation()}
-      >
+      <IconButton style={{ marginLeft: 'auto' }} onClick={onDeleteTrack}>
         <Delete />
       </IconButton>
     </StyledCard>

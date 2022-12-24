@@ -4,7 +4,7 @@ import { useNavigate, useParams } from 'react-router-dom';
 import { useInput } from 'hooks';
 import { useAppSelector, useAppDispatch } from 'hooks';
 import { tracksSelector } from 'store';
-import { fetchTrackInfo } from 'store/operations';
+import { fetchTrackInfo, addComment } from 'store/operations';
 
 const TrackInfo: FC = () => {
   const { trackInfo: track, isLoading, error } = useAppSelector(tracksSelector);
@@ -15,8 +15,20 @@ const TrackInfo: FC = () => {
   const { id } = useParams();
 
   useEffect(() => {
+    console.log('useefect');
     id && dispatch(fetchTrackInfo(id));
   }, [id, dispatch]);
+
+  const onAddComment = () => {
+    track &&
+      dispatch(
+        addComment({
+          username: String(username.value),
+          text: String(comment.value),
+          trackId: track._id,
+        })
+      );
+  };
 
   return (
     <>
@@ -51,7 +63,7 @@ const TrackInfo: FC = () => {
                 multiline
                 rows={4}
               />
-              <Button>Send</Button>
+              <Button onClick={onAddComment}>Send</Button>
             </Grid>
             <div>
               {track.comments.map((comment) => {

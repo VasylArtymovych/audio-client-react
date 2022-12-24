@@ -1,5 +1,10 @@
 import { createSlice } from '@reduxjs/toolkit';
-import { fetchTracks, fetchTrackInfo } from 'store/operations';
+import {
+  fetchTracks,
+  fetchTrackInfo,
+  addComment,
+  deleteTrack,
+} from 'store/operations';
 import { ITracksState } from 'types/tracks';
 
 const initialState: ITracksState = {
@@ -37,6 +42,40 @@ const tracksSlice = createSlice({
       state.isLoading = 'succeeded';
     });
     builder.addCase(fetchTrackInfo.rejected, (state, action) => {
+      if (typeof action.payload === 'string') {
+        state.error = action.payload;
+      } else {
+        state.error = 'Bed request';
+      }
+      state.isLoading = 'failed';
+    });
+    // delete track:
+    builder.addCase(deleteTrack.pending, (state) => {
+      state.isLoading = 'pending';
+    });
+    builder.addCase(deleteTrack.fulfilled, (state, action) => {
+      state.tracks = state.tracks.filter(
+        (track) => track._id !== action.payload
+      );
+      state.isLoading = 'succeeded';
+    });
+    builder.addCase(deleteTrack.rejected, (state, action) => {
+      if (typeof action.payload === 'string') {
+        state.error = action.payload;
+      } else {
+        state.error = 'Bed request';
+      }
+      state.isLoading = 'failed';
+    });
+    // add comment:
+    builder.addCase(addComment.pending, (state) => {
+      state.isLoading = 'pending';
+    });
+    builder.addCase(addComment.fulfilled, (state, action) => {
+      state.trackInfo?.comments.push(action.payload);
+      state.isLoading = 'succeeded';
+    });
+    builder.addCase(addComment.rejected, (state, action) => {
       if (typeof action.payload === 'string') {
         state.error = action.payload;
       } else {
