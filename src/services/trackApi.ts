@@ -16,3 +16,9 @@ export const deleteTrackById = async (
     .delete<IDeleteTrackResponse>('tracks/' + id)
     .then(({ data }) => data);
 };
+
+export const getTracksBySearchName = async (
+  name: string
+): Promise<ITrack[]> => {
+  return axios.get(`tracks/search?query=${name}`).then(({ data }) => data);
+};

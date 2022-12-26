@@ -5,16 +5,17 @@ import { ITrack } from 'types/tracks';
 import { StyledCard } from './TrackItem.styled';
 import { useNavigate } from 'react-router-dom';
 import { setActiveTrack } from 'store/reducers';
-import { useAppDispatch } from 'hooks';
+import { useAppDispatch, useAppSelector } from 'hooks';
 import { deleteTrack } from 'store/operations';
+import { playerSelector } from 'store';
 
 interface TrackItemProps {
   track: ITrack;
-  active?: boolean;
 }
-const TrackItem: FC<TrackItemProps> = ({ track, active = false }) => {
+const TrackItem: FC<TrackItemProps> = ({ track }) => {
   const dispatch = useAppDispatch();
   const navigate = useNavigate();
+  const { active, pause } = useAppSelector(playerSelector);
 
   const onPlay = (e: React.SyntheticEvent) => {
     e.stopPropagation();
@@ -29,7 +30,7 @@ const TrackItem: FC<TrackItemProps> = ({ track, active = false }) => {
   return (
     <StyledCard onClick={() => navigate(`/tracks/${track._id}`)}>
       <IconButton onClick={onPlay}>
-        {active ? <Pause /> : <PlayArrow />}
+        {active?._id === track._id && !pause ? <Pause /> : <PlayArrow />}
       </IconButton>
       <img
         src={`http://localhost:4000/${track.picture}`}

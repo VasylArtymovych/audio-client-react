@@ -26,6 +26,18 @@ export const fetchTrackInfo = createAsyncThunk(
   }
 );
 
+export const fetchTracksByName = createAsyncThunk(
+  'tracks/getTracksByName',
+  async (name: string, { rejectWithValue }) => {
+    try {
+      const tracks = await trackApi.getTracksBySearchName(name);
+      return tracks;
+    } catch (error: any) {
+      return rejectWithValue(error.message);
+    }
+  }
+);
+
 export const deleteTrack = createAsyncThunk(
   'tracks/deleteTrack',
   async (id: string, { rejectWithValue }) => {

@@ -1,13 +1,12 @@
 import { Box, Grid } from '@mui/material';
 import TrackItem from 'components/TrackItem';
+import { useAppSelector } from 'hooks';
 import { FC } from 'react';
-import { ITrack } from 'types/tracks';
+import { tracksSelector } from 'store';
 
-interface ITrackListProps {
-  tracks: ITrack[];
-}
+const TrackList: FC = () => {
+  const { tracks } = useAppSelector(tracksSelector);
 
-const TrackList: FC<ITrackListProps> = ({ tracks }) => {
   return (
     <Grid container direction="column">
       <Box p={2}>

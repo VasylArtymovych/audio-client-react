@@ -1,50 +1,19 @@
-import { ChangeEvent, useEffect } from 'react';
+import { ChangeEvent } from 'react';
 import { Grid, IconButton } from '@mui/material';
 import { Pause, PlayArrow, VolumeUp } from '@mui/icons-material';
 import TrackProgress from 'components/TrackProgress';
 import { StyledContainer } from './Player.styled';
 import { useAppDispatch, useAppSelector } from 'hooks/redux';
-import {
-  playTrack,
-  pauseTrack,
-  setCurrentTime,
-  setDuration,
-  setVolume,
-} from 'store/reducers';
+import { setCurrentTime, setVolume } from 'store/reducers';
 import { playerSelector } from 'store';
-import { host } from 'config';
 
-let audio: HTMLAudioElement = new Audio();
+import { usePlayerAudio } from 'hooks';
 
 const Player = () => {
   const { currentTime, duration, active, volume, pause } =
     useAppSelector(playerSelector);
   const dispatch = useAppDispatch();
-
-  useEffect(() => {
-    if (active) {
-      audio.src = host + active.audio;
-      audio.volume = 0.5;
-      audio.onloadedmetadata = () => {
-        dispatch(setDuration(Math.ceil(audio.duration)));
-      };
-      audio.ontimeupdate = () => {
-        dispatch(setCurrentTime(Math.ceil(audio.currentTime)));
-      };
-      dispatch(playTrack());
-      audio.play();
-    }
-  }, [active, dispatch]);
-
-  const play = () => {
-    if (pause) {
-      dispatch(playTrack());
-      audio.play();
-    } else {
-      dispatch(pauseTrack());
-      audio.pause();
-    }
-  };
+  const { audio, play } = usePlayerAudio();
 
   const onChangeVolume = (e: ChangeEvent<HTMLInputElement>) => {
     audio.volume = Number(e.target.value) / 100;

@@ -1,32 +1,44 @@
 import { useEffect } from 'react';
 import { playerSelector } from 'store';
-import { ITrack } from 'types/tracks';
 import { useAppDispatch, useAppSelector } from './redux';
-import { setCurrentTime, setDuration } from 'store/reducers';
+import {
+  pauseTrack,
+  playTrack,
+  setCurrentTime,
+  setDuration,
+} from 'store/reducers';
+import { host } from 'config';
 
-let audio: HTMLAudioElement;
+let audio: HTMLAudioElement = new Audio();
 
-export const usePlayerAudio = (track: ITrack) => {
-  const { active, volume } = useAppSelector(playerSelector);
+export const usePlayerAudio = () => {
+  const { active, pause } = useAppSelector(playerSelector);
   const dispatch = useAppDispatch();
 
   useEffect(() => {
-    if (!audio) {
-      audio = new Audio();
-    } else {
-      if (track) {
-        console.log(track.audio);
-        audio.src = track.audio;
-        audio.volume = volume / 100;
-        audio.onloadedmetadata = () => {
-          dispatch(setDuration(Math.ceil(audio.duration)));
-        };
-        audio.ontimeupdate = () => {
-          dispatch(setCurrentTime(Math.ceil(audio.currentTime)));
-        };
-      }
+    if (active) {
+      audio.src = host + active.audio;
+      audio.volume = 0.5;
+      audio.onloadedmetadata = () => {
+        dispatch(setDuration(Math.ceil(audio.duration)));
+      };
+      audio.ontimeupdate = () => {
+        dispatch(setCurrentTime(Math.ceil(audio.currentTime)));
+      };
+      dispatch(playTrack());
+      audio.play();
     }
-  }, [active, dispatch, track, volume]);
+  }, [active, dispatch]);
 
-  return { audio };
+  const play = () => {
+    if (pause) {
+      dispatch(playTrack());
+      audio.play();
+    } else {
+      dispatch(pauseTrack());
+      audio.pause();
+    }
+  };
+
+  return { audio, play };
 };
