@@ -1,6 +1,13 @@
 import { FC, useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { Box, Button, Card, Grid, TextField } from '@mui/material';
+import {
+  Box,
+  Button,
+  Card,
+  Grid,
+  LinearProgress,
+  TextField,
+} from '@mui/material';
 import TrackList from 'components/TrackList';
 import { routesPath } from 'config';
 import { useAppDispatch, useAppSelector } from 'hooks';
@@ -32,7 +39,7 @@ const TracksPage: FC = () => {
 
   return (
     <>
-      <Grid container justifyContent="center" sx={{ paddingTop: '5rem' }}>
+      <Grid container justifyContent="center" sx={{ padding: '5rem 0' }}>
         <Card style={{ width: '80%' }}>
           <Box p={2}>
             <Grid container justifyContent="space-between">
@@ -42,8 +49,17 @@ const TracksPage: FC = () => {
               </Button>
             </Grid>
           </Box>
-          <TextField fullWidth value={search} onChange={onSearch} />
-          {isLoading === 'pending' && <div>Is Loading...</div>}
+          <TextField
+            fullWidth
+            value={search}
+            label="Search by track name"
+            onChange={onSearch}
+          />
+          {isLoading === 'pending' && (
+            <Box sx={{ width: '100%', paddingTop: '0.5rem' }}>
+              <LinearProgress />
+            </Box>
+          )}
           {isLoading === 'succeeded' && <TrackList />}
           {isLoading === 'failed' && <h2>{error}</h2>}
         </Card>

@@ -46,6 +46,7 @@ const Player = () => {
         value={currentTime}
         right={duration}
         onChange={onChangeCurrentTime}
+        time={true}
       />
       <VolumeUp style={{ marginLeft: 'auto' }} />
       <TrackProgress value={volume} right={100} onChange={onChangeVolume} />

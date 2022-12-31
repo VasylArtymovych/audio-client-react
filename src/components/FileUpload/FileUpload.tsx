@@ -1,4 +1,5 @@
 import { ChangeEvent, FC, ReactNode, useRef } from 'react';
+import { InputWraper } from './FileUpload.styled';
 
 interface FileUploadProps {
   setFile: Function;
@@ -16,7 +17,7 @@ const FileUpload: FC<FileUploadProps> = ({ setFile, accept, children }) => {
   };
 
   return (
-    <div
+    <InputWraper
       onClick={() => {
         inputRef.current?.click();
       }}
@@ -29,7 +30,7 @@ const FileUpload: FC<FileUploadProps> = ({ setFile, accept, children }) => {
         onChange={onChangeHandler}
       />
       {children}
-    </div>
+    </InputWraper>
   );
 };
 

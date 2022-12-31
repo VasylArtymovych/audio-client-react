@@ -7,3 +7,9 @@ export const HomeContainer = styled('div')({
   justifyContent: 'center',
   padding: '5rem 0 0',
 });
+
+export const sxHome = {
+  width: '80%',
+  padding: '0 1rem',
+  textAlign: 'center',
+};

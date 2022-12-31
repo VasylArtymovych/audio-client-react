@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import { Button, Container, Grid, TextField } from '@mui/material';
@@ -9,8 +9,9 @@ import { useInput } from 'hooks';
 
 const CreateTrack = () => {
   const [activeStep, setActiveStep] = useState<number>(0);
-  const [picture, setPicture] = useState(null);
-  const [audio, setAudio] = useState(null);
+  const [picture, setPicture] = useState<any>(null);
+  const [audio, setAudio] = useState<any>(null);
+  const [src, setSrc] = useState<string>('');
   const name = useInput('');
   const artist = useInput('');
   const text = useInput('');
@@ -43,6 +44,18 @@ const CreateTrack = () => {
     }
   };
 
+  useEffect(() => {
+    if (picture) {
+      let reader = new FileReader();
+      reader.readAsDataURL(picture);
+      reader.onload = (e) => {
+        e.target &&
+          typeof e.target.result === 'string' &&
+          setSrc(e.target.result);
+      };
+    }
+  }, [picture]);
+
   return (
     <Container sx={{ p: '5rem 0' }}>
       <StepWraper activeStep={activeStep}>
@@ -70,11 +83,21 @@ const CreateTrack = () => {
         {activeStep === 1 && (
           <FileUpload setFile={setPicture} accept={'image/*'}>
             <Button>Upload image</Button>
+            {picture && (
+              <img
+                id="uploadPreview"
+                src={src}
+                alt="uploadImage"
+                width="100px"
+                height="100px"
+              />
+            )}
           </FileUpload>
         )}
         {activeStep === 2 && (
           <FileUpload setFile={setAudio} accept={'audio/*'}>
             <Button>Upload track</Button>
+            {audio && <div>{audio.name}</div>}
           </FileUpload>
         )}
       </StepWraper>

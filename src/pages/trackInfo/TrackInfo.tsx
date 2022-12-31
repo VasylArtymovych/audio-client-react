@@ -1,5 +1,12 @@
 import { FC, useEffect } from 'react';
-import { Button, Container, Grid, TextField } from '@mui/material';
+import {
+  Box,
+  Button,
+  Container,
+  Grid,
+  LinearProgress,
+  TextField,
+} from '@mui/material';
 import { useNavigate, useParams } from 'react-router-dom';
 import { useInput } from 'hooks';
 import { useAppSelector, useAppDispatch } from 'hooks';
@@ -34,7 +41,11 @@ const TrackInfo: FC = () => {
     <>
       <Container sx={{ p: '5rem 0' }}>
         <Button onClick={() => navigate('/tracks')}>Back to list</Button>
-        {isLoading === 'pending' && <div>Is loading...</div>}
+        {isLoading === 'pending' && (
+          <Box sx={{ width: '100%' }}>
+            <LinearProgress color="secondary" />
+          </Box>
+        )}
         {isLoading === 'failed' && <div>{error}</div>}
         {isLoading === 'succeeded' && track && (
           <>
@@ -48,7 +59,7 @@ const TrackInfo: FC = () => {
               <div style={{ marginLeft: 30 }}>
                 <h2>Track - {track.name}</h2>
                 <h2>Artist - {track.artist}</h2>
-                <h2>Lesteners - {track.listeners}</h2>
+                <h2>Listeners - {track.listeners}</h2>
               </div>
             </Grid>
             <h1>Track text</h1>

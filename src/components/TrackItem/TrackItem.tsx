@@ -5,7 +5,7 @@ import { ITrack } from 'types/tracks';
 import { StyledCard } from './TrackItem.styled';
 import { useNavigate } from 'react-router-dom';
 import { setActiveTrack } from 'store/reducers';
-import { useAppDispatch, useAppSelector } from 'hooks';
+import { useAppDispatch, useAppSelector, useTimeConvertor } from 'hooks';
 import { deleteTrack } from 'store/operations';
 import { playerSelector } from 'store';
 
@@ -15,7 +15,9 @@ interface TrackItemProps {
 const TrackItem: FC<TrackItemProps> = ({ track }) => {
   const dispatch = useAppDispatch();
   const navigate = useNavigate();
-  const { active, pause } = useAppSelector(playerSelector);
+  const { active, pause, duration, currentTime } =
+    useAppSelector(playerSelector);
+  const { convertSec } = useTimeConvertor();
 
   const onPlay = (e: React.SyntheticEvent) => {
     e.stopPropagation();
@@ -46,7 +48,12 @@ const TrackItem: FC<TrackItemProps> = ({ track }) => {
         <div>{track.name}</div>
         <div style={{ fontSize: 12, color: 'grey' }}>{track.artist}</div>
       </Grid>
-      {active && <div>02:42 / 03:22</div>}
+      {active?._id === track._id && (
+        <div>
+          {convertSec(currentTime).minutes}:{convertSec(currentTime).seconds} /{' '}
+          {convertSec(duration).minutes}:{convertSec(duration).seconds}
+        </div>
+      )}
       <IconButton style={{ marginLeft: 'auto' }} onClick={onDeleteTrack}>
         <Delete />
       </IconButton>
