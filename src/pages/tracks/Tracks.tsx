@@ -7,12 +7,14 @@ import {
   Grid,
   LinearProgress,
   TextField,
+  Typography,
 } from '@mui/material';
 import TrackList from 'components/TrackList';
 import { routesPath } from 'config';
 import { useAppDispatch, useAppSelector } from 'hooks';
 import { fetchTracks, fetchTracksByName } from 'store/operations';
 import { tracksSelector } from 'store';
+import { sxBtn } from './Tracks.styled';
 
 const TracksPage: FC = () => {
   const navigate = useNavigate();
@@ -40,11 +42,16 @@ const TracksPage: FC = () => {
   return (
     <>
       <Grid container justifyContent="center" sx={{ padding: '5rem 0' }}>
-        <Card style={{ width: '80%' }}>
+        <Card sx={{ width: '80%', background: 'lightblue' }}>
           <Box p={2}>
             <Grid container justifyContent="space-between">
-              <h2>Tracks list</h2>
-              <Button onClick={() => navigate(routesPath.create)}>
+              <Typography
+                component="h3"
+                sx={{ fontSize: '2rem', color: 'primary.dark' }}
+              >
+                Tracks list
+              </Typography>
+              <Button sx={sxBtn} onClick={() => navigate(routesPath.create)}>
                 Download
               </Button>
             </Grid>
@@ -54,6 +61,7 @@ const TracksPage: FC = () => {
             value={search}
             label="Search by track name"
             onChange={onSearch}
+            sx={{ background: 'whitesmoke' }}
           />
           {isLoading === 'pending' && (
             <Box sx={{ width: '100%', paddingTop: '0.5rem' }}>

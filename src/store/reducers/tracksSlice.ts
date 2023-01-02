@@ -33,6 +33,7 @@ const tracksSlice = createSlice({
       if (typeof action.payload === 'string') {
         state.error = action.payload;
       }
+      state.isLoading = 'failed';
     });
     // get track by id:
     builder.addCase(fetchTrackInfo.pending, (state) => {

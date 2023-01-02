@@ -17,12 +17,11 @@ const TrackInfo: FC = () => {
   const { trackInfo: track, isLoading, error } = useAppSelector(tracksSelector);
   const dispatch = useAppDispatch();
   const navigate = useNavigate();
+  const { id } = useParams();
   const username = useInput('');
   const comment = useInput('');
-  const { id } = useParams();
 
   useEffect(() => {
-    console.log('useefect');
     id && dispatch(fetchTrackInfo(id));
   }, [id, dispatch]);
 

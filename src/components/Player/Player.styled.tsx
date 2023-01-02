@@ -1,8 +1,8 @@
 import { styled } from '@mui/material';
 
 export const StyledContainer = styled('div')`
-  height: 5rem;
   width: 100%;
+  height: 3.5rem;
   position: fixed;
   bottom: 0;
   display: flex;

@@ -1,6 +1,4 @@
-// import { Container } from '@mui/material';
 import { Paper } from '@mui/material';
-import React from 'react';
 import { HomeContainer, sxHome } from './Home.styled';
 
 const Home = () => {
