@@ -2,16 +2,17 @@ import { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import { Button, Container, Grid, TextField } from '@mui/material';
+import { toast } from 'react-toastify';
 import FileUpload from 'components/FileUpload';
 import StepWraper from 'components/StepWraper';
-import { host, routesPath } from 'config';
+import { host, routesPath, toastConfig } from 'config';
 import { useInput } from 'hooks';
 
 const CreateTrack = () => {
   const [activeStep, setActiveStep] = useState<number>(0);
   const [picture, setPicture] = useState<any>(null);
   const [audio, setAudio] = useState<any>(null);
-  const [src, setSrc] = useState<string>('');
+  const [imgSrc, setImgSrc] = useState<string>('');
   const name = useInput('');
   const artist = useInput('');
   const text = useInput('');
@@ -25,22 +26,27 @@ const CreateTrack = () => {
     if (activeStep !== 2) {
       setActiveStep((prev) => (prev += 1));
     } else {
-      const formData = new FormData();
-      formData.append('name', name.value);
-      formData.append('artist', artist.value);
-      formData.append('text', text.value);
-      if (picture) {
+      if (!name.value || !artist.value) {
+        toast.error('Missing track or artist name', toastConfig);
+        return;
+      } else if (!picture || !audio) {
+        toast.error('Upload image or audio', toastConfig);
+        return;
+      } else {
+        const formData = new FormData();
+        formData.append('name', name.value);
+        formData.append('artist', artist.value);
+        formData.append('text', text.value);
         formData.append('picture', picture);
-      }
-      if (audio) {
         formData.append('audio', audio);
+
+        axios
+          .post(host + 'tracks', formData)
+          .then(() => {
+            navigate(routesPath.tracks, { replace: true });
+          })
+          .catch((error) => toast.error(error.message, toastConfig));
       }
-      axios
-        .post(host + 'tracks', formData)
-        .then(() => {
-          navigate(routesPath.tracks, { replace: true });
-        })
-        .catch((error) => console.log('axios error', error));
     }
   };
 
@@ -51,7 +57,7 @@ const CreateTrack = () => {
       reader.onload = (e) => {
         e.target &&
           typeof e.target.result === 'string' &&
-          setSrc(e.target.result);
+          setImgSrc(e.target.result);
       };
     }
   }, [picture]);
@@ -65,11 +71,13 @@ const CreateTrack = () => {
               {...name}
               label={'Track name'}
               style={{ marginTop: '0.5rem' }}
+              required
             />
             <TextField
               {...artist}
               label={'Artist name'}
               style={{ marginTop: '0.5rem' }}
+              required
             />
             <TextField
               {...text}
@@ -85,8 +93,7 @@ const CreateTrack = () => {
             <Button>Upload image</Button>
             {picture && (
               <img
-                id="uploadPreview"
-                src={src}
+                src={imgSrc}
                 alt="uploadImage"
                 width="100px"
                 height="100px"
@@ -105,7 +112,7 @@ const CreateTrack = () => {
         <Button disabled={activeStep === 0} onClick={back}>
           Back
         </Button>
-        <Button onClick={next}>Next</Button>
+        <Button onClick={next}>{activeStep === 2 ? 'Create' : 'Next'}</Button>
       </Grid>
     </Container>
   );

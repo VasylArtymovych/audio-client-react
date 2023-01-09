@@ -19,7 +19,7 @@ import HomeIcon from '@mui/icons-material/Home';
 import AudiotrackIcon from '@mui/icons-material/Audiotrack';
 import AlbumIcon from '@mui/icons-material/Album';
 import { AppBar, DrawerHeader, drawerWidth, StyledLink } from './NavBar.styled';
-// import { NavLink } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 
 const menuItems = [
   { text: 'Home', href: '/' },
@@ -30,6 +30,7 @@ const menuItems = [
 export default function NavBar() {
   const theme = useTheme();
   const [open, setOpen] = React.useState(false);
+  const navigate = useNavigate();
 
   const handleDrawerOpen = () => {
     setOpen(true);
@@ -39,12 +40,22 @@ export default function NavBar() {
     setOpen(false);
   };
 
+  const onLogoClick = () => {
+    navigate('/');
+  };
+
   return (
     <Box sx={{ display: 'flex' }}>
       <CssBaseline />
       <AppBar position="fixed" open={open} sx={{ backgroundColor: '#130e36' }}>
         <Toolbar>
-          <Typography variant="h6" noWrap sx={{ flexGrow: 1 }} component="div">
+          <Typography
+            variant="h6"
+            noWrap
+            sx={{ flexGrow: 1, cursor: 'pointer' }}
+            component="div"
+            onClick={onLogoClick}
+          >
             Audio storage
           </Typography>
           <IconButton

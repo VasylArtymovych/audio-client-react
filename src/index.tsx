@@ -7,6 +7,8 @@ import App from 'components/App';
 import { ThemeProvider } from '@mui/material';
 import { theme } from 'styles/theme';
 import { setupStore } from 'store';
+import { ToastContainer } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 const root = ReactDOM.createRoot(
   document.getElementById('root') as HTMLElement
@@ -17,6 +19,7 @@ root.render(
       <BrowserRouter>
         <Provider store={setupStore()}>
           <App />
+          <ToastContainer />
         </Provider>
       </BrowserRouter>
     </ThemeProvider>
