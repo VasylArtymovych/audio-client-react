@@ -1,5 +1,5 @@
 import { useEffect } from 'react';
-import { playerSelector } from 'store';
+import { playerSelector } from 'store/selectors';
 import { useAppDispatch, useAppSelector } from './redux';
 import {
   pauseTrack,

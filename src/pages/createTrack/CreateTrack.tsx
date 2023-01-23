@@ -112,7 +112,7 @@ const CreateTrack = () => {
         <Button disabled={activeStep === 0} onClick={back}>
           Back
         </Button>
-        <Button onClick={next}>{activeStep === 2 ? 'Create' : 'Next'}</Button>
+        <Button onClick={next}>{activeStep === 2 ? 'Upload' : 'Next'}</Button>
       </Grid>
     </Container>
   );

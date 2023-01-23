@@ -29,9 +29,10 @@ const tracksSlice = createSlice({
       state.isLoading = 'succeeded';
     });
     builder.addCase(fetchTracks.rejected, (state, action) => {
-      state.isLoading = 'failed';
       if (typeof action.payload === 'string') {
         state.error = action.payload;
+      } else {
+        state.error = 'Bed request';
       }
       state.isLoading = 'failed';
     });

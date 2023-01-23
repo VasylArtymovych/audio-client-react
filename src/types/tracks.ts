@@ -22,7 +22,7 @@ export interface ITrack {
   comments: IComment[];
 }
 
-type LoadingType = 'idle' | 'pending' | 'succeeded' | 'failed';
+export type LoadingType = 'idle' | 'pending' | 'succeeded' | 'failed';
 
 export interface ITracksState {
   tracks: ITrack[];

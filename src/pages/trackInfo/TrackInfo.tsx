@@ -10,7 +10,7 @@ import {
 import { useNavigate, useParams } from 'react-router-dom';
 import { useInput } from 'hooks';
 import { useAppSelector, useAppDispatch } from 'hooks';
-import { tracksSelector } from 'store';
+import { tracksSelector } from 'store/selectors';
 import { fetchTrackInfo, addComment } from 'store/operations';
 
 const TrackInfo: FC = () => {

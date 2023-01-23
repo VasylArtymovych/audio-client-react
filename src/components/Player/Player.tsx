@@ -5,7 +5,7 @@ import TrackProgress from 'components/TrackProgress';
 import { StyledContainer } from './Player.styled';
 import { useAppDispatch, useAppSelector } from 'hooks/redux';
 import { setCurrentTime, setVolume } from 'store/reducers';
-import { playerSelector } from 'store';
+import { playerSelector } from 'store/selectors';
 
 import { usePlayerAudio } from 'hooks';
 

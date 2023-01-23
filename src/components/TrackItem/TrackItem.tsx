@@ -7,7 +7,7 @@ import { useNavigate } from 'react-router-dom';
 import { setActiveTrack } from 'store/reducers';
 import { useAppDispatch, useAppSelector, useTimeConvertor } from 'hooks';
 import { deleteTrack } from 'store/operations';
-import { playerSelector } from 'store';
+import { playerSelector } from 'store/selectors';
 
 interface TrackItemProps {
   track: ITrack;
