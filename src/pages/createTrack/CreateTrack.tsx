@@ -1,12 +1,12 @@
 import { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import axios from 'axios';
 import { Button, Container, Grid, TextField } from '@mui/material';
+import axios from 'axios';
 import { toast } from 'react-toastify';
-import FileUpload from 'components/FileUpload';
-import StepWraper from 'components/StepWraper';
 import { host, routesPath, toastConfig } from 'config';
 import { useInput } from 'hooks';
+import FileUpload from 'components/FileUpload';
+import StepWraper from 'components/StepWraper';
 
 const CreateTrack = () => {
   const [activeStep, setActiveStep] = useState<number>(0);

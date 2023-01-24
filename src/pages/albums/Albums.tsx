@@ -5,6 +5,7 @@ import React from 'react';
 
 const Albums = () => {
   useFetchAlbums();
+
   return (
     <>
       <Grid container justifyContent="center" sx={{ padding: '5rem 0' }}>
@@ -16,7 +17,7 @@ const Albums = () => {
                 component="h3"
                 sx={{ fontSize: '2rem', color: 'primary.dark' }}
               >
-                Albumes
+                Albums
               </Typography>
               <Button onClick={() => console.log('click create album')}>
                 Create album
@@ -30,8 +31,8 @@ const Albums = () => {
             <Box sx={{ width: '100%', paddingTop: '0.5rem' }}>
               <LinearProgress />
             </Box>
-          )}
-          {isLoading === 'succeeded' && <TrackList />}
+          )} */}
+          {/* {isLoading === 'succeeded' && <TrackList />}
           {isLoading === 'failed' && <h2>{error}</h2>} */}
         </Card>
       </Grid>

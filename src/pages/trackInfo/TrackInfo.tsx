@@ -1,40 +1,22 @@
 import { FC, useEffect } from 'react';
-import {
-  Box,
-  Button,
-  Container,
-  Grid,
-  LinearProgress,
-  TextField,
-} from '@mui/material';
 import { useNavigate, useParams } from 'react-router-dom';
-import { useInput } from 'hooks';
+import { Box, Button, Container, Grid, LinearProgress } from '@mui/material';
 import { useAppSelector, useAppDispatch } from 'hooks';
 import { tracksSelector } from 'store/selectors';
-import { fetchTrackInfo, addComment } from 'store/operations';
+import { fetchTrackInfo } from 'store/operations';
+import { host } from 'config';
+import CommentList from 'components/Comments/CommentList';
+import CommentForm from 'components/Comments/CommentForm';
 
 const TrackInfo: FC = () => {
   const { trackInfo: track, isLoading, error } = useAppSelector(tracksSelector);
   const dispatch = useAppDispatch();
   const navigate = useNavigate();
   const { id } = useParams();
-  const username = useInput('');
-  const comment = useInput('');
 
   useEffect(() => {
     id && dispatch(fetchTrackInfo(id));
   }, [id, dispatch]);
-
-  const onAddComment = () => {
-    track &&
-      dispatch(
-        addComment({
-          username: String(username.value),
-          text: String(comment.value),
-          trackId: track._id,
-        })
-      );
-  };
 
   return (
     <>
@@ -50,7 +32,7 @@ const TrackInfo: FC = () => {
           <>
             <Grid container style={{ margin: '20px 0' }}>
               <img
-                src={`http://localhost:4000/${track.picture}`}
+                src={host + track.picture}
                 alt="logo"
                 width={200}
                 height={200}
@@ -63,28 +45,9 @@ const TrackInfo: FC = () => {
             </Grid>
             <h1>Track text</h1>
             <p>{track.text}</p>
+            <CommentForm track={track} />
             <h2>Comments</h2>
-            <Grid container>
-              <TextField {...username} label="Your name" fullWidth />
-              <TextField
-                {...comment}
-                label="Comment"
-                fullWidth
-                multiline
-                rows={4}
-              />
-              <Button onClick={onAddComment}>Send</Button>
-            </Grid>
-            <div>
-              {track.comments.map((comment) => {
-                return (
-                  <div key={comment._id}>
-                    <div>Author - {comment.username}</div>
-                    <div>Comment - {comment.text}</div>
-                  </div>
-                );
-              })}
-            </div>
+            <CommentList track={track} />
           </>
         )}
       </Container>
