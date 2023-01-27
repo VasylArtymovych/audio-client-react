@@ -12,7 +12,6 @@ import MenuIcon from '@mui/icons-material/Menu';
 import ChevronLeftIcon from '@mui/icons-material/ChevronLeft';
 import ChevronRightIcon from '@mui/icons-material/ChevronRight';
 import ListItem from '@mui/material/ListItem';
-// import ListItemButton from '@mui/material/ListItemButton';
 import ListItemIcon from '@mui/material/ListItemIcon';
 import ListItemText from '@mui/material/ListItemText';
 import HomeIcon from '@mui/icons-material/Home';
@@ -99,14 +98,12 @@ export default function NavBar() {
           {menuItems.map(({ text, href }, index) => (
             <ListItem key={text} disablePadding>
               <StyledLink to={href}>
-                {/* <ListItemButton> */}
                 <ListItemIcon>
                   {index === 0 && <HomeIcon sx={{ color: 'white' }} />}
                   {index === 1 && <AudiotrackIcon sx={{ color: 'white' }} />}
                   {index === 2 && <AlbumIcon sx={{ color: 'white' }} />}
                 </ListItemIcon>
                 <ListItemText primary={text} />
-                {/* </ListItemButton> */}
               </StyledLink>
             </ListItem>
           ))}

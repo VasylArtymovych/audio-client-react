@@ -10,6 +10,7 @@ export const HomeContainer = styled('div')({
   backgroundImage: `url(${bgrImg})`,
   backgroundRepeat: 'no-repeat',
   backgroundSize: 'cover',
+  color: 'white',
 });
 
 export const sxHome = {
@@ -17,5 +18,5 @@ export const sxHome = {
   padding: '0 1rem',
   textAlign: 'center',
   color: '#fff',
-  backgroundColor: '#716b99',
+  backgroundColor: 'transparent',
 };

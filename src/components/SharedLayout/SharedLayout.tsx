@@ -1,8 +1,7 @@
-// import { Container } from '@mui/material';
-import Player from 'components/Player';
 import { FC, Suspense } from 'react';
 import { Outlet } from 'react-router-dom';
-import NavBar from '../NavBar';
+import NavBar from 'components/NavBar';
+import Player from 'components/Player';
 
 const SharedLayout: FC = () => {
   return (

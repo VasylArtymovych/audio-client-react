@@ -1,10 +1,21 @@
-import { Box, Button, Card, Grid, Typography } from '@mui/material';
+import {
+  Box,
+  Button,
+  Card,
+  Grid,
+  LinearProgress,
+  Typography,
+} from '@mui/material';
+import AlbumList from 'components/AlbumList';
 import SearchTrack from 'components/SearchTrack';
 import { useFetchAlbums } from 'hooks/getAlbums';
 import React from 'react';
+import { useSelector } from 'react-redux';
+import { albumsSelector } from 'store/selectors';
 
 const Albums = () => {
   useFetchAlbums();
+  const { isLoading, error } = useSelector(albumsSelector);
 
   return (
     <>
@@ -27,13 +38,13 @@ const Albums = () => {
           {/**Seaach tracks input */}
           <SearchTrack type="albums" />
           {/** Loader */}
-          {/* {isLoading === 'pending' && (
+          {isLoading === 'pending' && (
             <Box sx={{ width: '100%', paddingTop: '0.5rem' }}>
               <LinearProgress />
             </Box>
-          )} */}
-          {/* {isLoading === 'succeeded' && <TrackList />}
-          {isLoading === 'failed' && <h2>{error}</h2>} */}
+          )}
+          {isLoading === 'succeeded' && <AlbumList />}
+          {isLoading === 'failed' && <h2>{error}</h2>}
         </Card>
       </Grid>
     </>

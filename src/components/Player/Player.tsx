@@ -1,13 +1,12 @@
 import { ChangeEvent } from 'react';
 import { Grid, IconButton } from '@mui/material';
 import { Pause, PlayArrow, VolumeUp } from '@mui/icons-material';
-import TrackProgress from 'components/TrackProgress';
-import { StyledContainer } from './Player.styled';
-import { useAppDispatch, useAppSelector } from 'hooks/redux';
 import { setCurrentTime, setVolume } from 'store/reducers';
 import { playerSelector } from 'store/selectors';
-
+import { useAppDispatch, useAppSelector } from 'hooks/redux';
 import { usePlayerAudio } from 'hooks';
+import { StyledContainer } from './Player.styled';
+import TrackProgress from 'components/TrackProgress';
 
 const Player = () => {
   const { currentTime, duration, active, volume, pause } =
