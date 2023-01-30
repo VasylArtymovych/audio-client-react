@@ -1,3 +1,4 @@
+import React from 'react';
 import {
   Box,
   Button,
@@ -6,12 +7,11 @@ import {
   LinearProgress,
   Typography,
 } from '@mui/material';
-import AlbumList from 'components/AlbumList';
-import SearchTrack from 'components/SearchTrack';
 import { useFetchAlbums } from 'hooks/getAlbums';
-import React from 'react';
 import { useSelector } from 'react-redux';
 import { albumsSelector } from 'store/selectors';
+import AlbumList from 'components/AlbumList';
+import SearchTrack from 'components/SearchTrack';
 
 const Albums = () => {
   useFetchAlbums();
@@ -19,14 +19,22 @@ const Albums = () => {
 
   return (
     <>
-      <Grid container justifyContent="center" sx={{ padding: '5rem 0' }}>
-        <Card sx={{ width: '97%', background: 'lightblue' }}>
+      <Grid
+        container
+        justifyContent="center"
+        sx={{ padding: '5rem 0', width: '100%' }}
+      >
+        <Card sx={{ width: '97%', background: 'lightblue', margin: '0 auto' }}>
           {/** Albums list top */}
           <Box p={2}>
             <Grid container justifyContent="space-between">
               <Typography
                 component="h3"
-                sx={{ fontSize: '2rem', color: 'primary.dark' }}
+                sx={{
+                  fontSize: '2rem',
+                  color: 'primary.dark',
+                  fontFamily: 'fantasy',
+                }}
               >
                 Albums
               </Typography>

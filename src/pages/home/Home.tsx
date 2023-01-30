@@ -1,5 +1,4 @@
-import { Paper } from '@mui/material';
-import { HomeContainer, sxHome } from './Home.styled';
+import { HomeContainer } from './Home.styled';
 
 const Home = () => {
   return (

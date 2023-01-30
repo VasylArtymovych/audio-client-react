@@ -2,6 +2,7 @@ import { lazy } from 'react';
 import { Route, Routes } from 'react-router-dom';
 import { routesPath } from 'config';
 import SharedLayout from '../SharedLayout/SharedLayout';
+import AlbumTracks from 'pages/albumTracks';
 
 const HomePage = lazy(() => import('pages/home'));
 const TracksPage = lazy(() => import('pages/tracks'));
@@ -16,6 +17,7 @@ function App() {
         <Route path={routesPath.home} element={<SharedLayout />}>
           <Route index element={<HomePage />} />
           <Route path={routesPath.albums} element={<AlbumsPage />} />
+          <Route path={routesPath.albumTracks} element={<AlbumTracks />} />
           <Route path={routesPath.tracks} element={<TracksPage />} />
           <Route path={routesPath.trackInfo} element={<TrackInfoPage />} />
           <Route path={routesPath.create} element={<CreateTrackPage />} />

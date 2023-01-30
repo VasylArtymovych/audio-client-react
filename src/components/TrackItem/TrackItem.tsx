@@ -45,7 +45,7 @@ const TrackItem: FC<TrackItemProps> = ({ track }) => {
         direction="column"
         style={{ width: 200, margin: '0 20px' }}
       >
-        <div>{track.name}</div>
+        <p>{track.name}</p>
         <div style={{ fontSize: 12, color: 'grey' }}>{track.artist}</div>
       </Grid>
       {active?._id === track._id && (

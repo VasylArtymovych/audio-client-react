@@ -11,12 +11,7 @@ export const HomeContainer = styled('div')({
   backgroundRepeat: 'no-repeat',
   backgroundSize: 'cover',
   color: 'white',
+  '&>h1,h3': {
+    fontFamily: 'fantasy',
+  },
 });
-
-export const sxHome = {
-  width: '80%',
-  padding: '0 1rem',
-  textAlign: 'center',
-  color: '#fff',
-  backgroundColor: 'transparent',
-};

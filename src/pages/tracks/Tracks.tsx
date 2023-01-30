@@ -13,23 +13,27 @@ import SearchTrack from 'components/SearchTrack';
 import { routesPath } from 'config';
 import { useAppSelector, useFetchTracks } from 'hooks';
 import { tracksSelector } from 'store/selectors';
-import { sxBtn } from './Tracks.styled';
+import { Container, sxBtn } from './Tracks.styled';
 
 const TracksPage: FC = () => {
   useFetchTracks();
   const navigate = useNavigate();
-  const { error, isLoading } = useAppSelector(tracksSelector);
+  const { tracks, error, isLoading } = useAppSelector(tracksSelector);
 
   return (
-    <>
+    <Container>
       <Grid container justifyContent="center" sx={{ padding: '5rem 0' }}>
-        <Card sx={{ width: '80%', background: 'lightblue' }}>
+        <Card sx={{ width: '80%', background: 'rgba(67, 40, 107, 0.8)' }}>
           {/** Traks list top */}
           <Box p={2}>
             <Grid container justifyContent="space-between">
               <Typography
                 component="h3"
-                sx={{ fontSize: '2rem', color: 'primary.dark' }}
+                sx={{
+                  fontSize: '2rem',
+                  color: 'primary.dark',
+                  fontFamily: 'fantasy',
+                }}
               >
                 Tracks list
               </Typography>
@@ -46,11 +50,11 @@ const TracksPage: FC = () => {
               <LinearProgress />
             </Box>
           )}
-          {isLoading === 'succeeded' && <TrackList />}
+          {isLoading === 'succeeded' && <TrackList tracks={tracks} />}
           {isLoading === 'failed' && <h2>{error}</h2>}
         </Card>
       </Grid>
-    </>
+    </Container>
   );
 };
 

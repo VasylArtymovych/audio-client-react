@@ -19,6 +19,7 @@ import AudiotrackIcon from '@mui/icons-material/Audiotrack';
 import AlbumIcon from '@mui/icons-material/Album';
 import { AppBar, DrawerHeader, drawerWidth, StyledLink } from './NavBar.styled';
 import { useNavigate } from 'react-router-dom';
+import musicLogo from 'images/music-logo.png';
 
 const menuItems = [
   { text: 'Home', href: '/' },
@@ -48,10 +49,15 @@ export default function NavBar() {
       <CssBaseline />
       <AppBar position="fixed" open={open} sx={{ backgroundColor: '#130e36' }}>
         <Toolbar>
+          <img
+            src={musicLogo}
+            alt="music-logo"
+            style={{ width: '3rem', height: '3rem', color: 'white' }}
+          />
           <Typography
             variant="h6"
             noWrap
-            sx={{ flexGrow: 1, cursor: 'pointer' }}
+            sx={{ flexGrow: 1, cursor: 'pointer', fontFamily: 'fantasy' }}
             component="div"
             onClick={onLogoClick}
           >

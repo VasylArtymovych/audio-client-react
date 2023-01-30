@@ -1,6 +1,6 @@
 import styled from '@emotion/styled';
-import { blue } from '@mui/material/colors';
 import { theme } from 'styles/theme';
+import { blue } from '@mui/material/colors';
 import tracksBgrImg from 'images/music-background.jpeg';
 
 export const sxBtn = {

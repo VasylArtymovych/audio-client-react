@@ -6,4 +6,10 @@ export const StyledCard = styled(Card)({
   padding: '10px',
   display: 'flex',
   alignItems: 'center',
+  background: 'lightblue',
+
+  '&>img': {
+    width: '3rem',
+    height: '3rem',
+  },
 });
