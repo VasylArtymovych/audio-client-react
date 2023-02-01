@@ -25,3 +25,15 @@ export const fetchAlbumsByName = createAsyncThunk(
     }
   }
 );
+
+export const fetchAlbumTracks = createAsyncThunk(
+  'albums/getAlbumTracks',
+  async (albumId: string, { rejectWithValue }) => {
+    try {
+      const album = await albumApi.getUlbumTracks(albumId);
+      return album;
+    } catch (error: any) {
+      return rejectWithValue(error.message);
+    }
+  }
+);

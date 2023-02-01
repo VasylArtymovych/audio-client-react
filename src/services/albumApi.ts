@@ -6,5 +6,11 @@ export const getAllUlbums = async (): Promise<IAlbum[]> => {
 };
 
 export const getUlbumsByName = async (name: string): Promise<IAlbum[]> => {
-  return axios.get<IAlbum[]>(`albums/search?query=${name}`).then(({ data }) => data);
+  return axios
+    .get<IAlbum[]>(`albums/search?query=${name}`)
+    .then(({ data }) => data);
+};
+
+export const getUlbumTracks = async (albumId: string): Promise<IAlbum> => {
+  return axios.get<IAlbum>(`albums/${albumId}`).then(({ data }) => data);
 };

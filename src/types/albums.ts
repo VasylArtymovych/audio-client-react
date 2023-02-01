@@ -5,6 +5,7 @@ export interface IAlbum {
   name: string;
   artist: string;
   picture: string;
+  tracks: ITrack[];
 }
 
 export interface IAlbumsState {

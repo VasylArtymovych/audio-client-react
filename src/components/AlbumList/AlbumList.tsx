@@ -1,11 +1,12 @@
 import ImageList from '@mui/material/ImageList';
-import { useSelector } from 'react-redux';
-import { albumsSelector } from 'store/selectors';
+import { IAlbum } from 'types/albums';
 import ListItem from './ListItem';
 
-const AlbumList = () => {
-  const { albums } = useSelector(albumsSelector);
+interface AlbumListProps {
+  albums: IAlbum[];
+}
 
+const AlbumList = ({ albums }: AlbumListProps) => {
   return (
     <ImageList
       gap={15}

@@ -1,4 +1,3 @@
-import React from 'react';
 import {
   Box,
   Button,
@@ -15,7 +14,7 @@ import SearchTrack from 'components/SearchTrack';
 
 const Albums = () => {
   useFetchAlbums();
-  const { isLoading, error } = useSelector(albumsSelector);
+  const { albums, isLoading, error } = useSelector(albumsSelector);
 
   return (
     <>
@@ -51,7 +50,7 @@ const Albums = () => {
               <LinearProgress />
             </Box>
           )}
-          {isLoading === 'succeeded' && <AlbumList />}
+          {isLoading === 'succeeded' && <AlbumList albums={albums} />}
           {isLoading === 'failed' && <h2>{error}</h2>}
         </Card>
       </Grid>

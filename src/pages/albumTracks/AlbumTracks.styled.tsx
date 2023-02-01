@@ -1,12 +1,11 @@
 import styled from '@emotion/styled';
 import { theme } from 'styles/theme';
-import { blue } from '@mui/material/colors';
 import tracksBgrImg from 'images/music-background.jpeg';
 
 export const sxBtn = {
-  // color: (theme: Theme) => theme.palette.primary.dark,
+  margin: '5rem 0 0 1rem',
   color: theme.palette.primary.dark,
-  '&:hover': { backgroundColor: blue[100] },
+  '&:hover': { backgroundColor: 'rgba(67, 40, 107, 0.8)' },
 };
 
 export const Container = styled.div({

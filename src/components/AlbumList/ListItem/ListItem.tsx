@@ -14,7 +14,7 @@ interface ListItemProps {
 }
 
 const ListItem = ({ item }: ListItemProps) => {
-  const [value, setValue] = useState<number | null>(1);
+  const [value, setValue] = useState<number | null>(1.5);
   const navigate = useNavigate();
 
   return (
