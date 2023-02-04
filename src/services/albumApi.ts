@@ -12,5 +12,7 @@ export const getUlbumsByName = async (name: string): Promise<IAlbum[]> => {
 };
 
 export const getUlbumTracks = async (albumId: string): Promise<IAlbum> => {
-  return axios.get<IAlbum>(`albums/${albumId}`).then(({ data }) => data);
+  return axios
+    .get<IAlbum>(`albums/current/${albumId}`)
+    .then(({ data }) => data);
 };

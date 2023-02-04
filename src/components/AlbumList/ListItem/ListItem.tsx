@@ -19,10 +19,7 @@ const ListItem = ({ item }: ListItemProps) => {
 
   return (
     <>
-      <ImageListItem
-        sx={{ height: '370px !important', cursor: 'pointer' }}
-        onClick={() => navigate(`${item._id}`)}
-      >
+      <ImageListItem sx={{ height: '370px !important', cursor: 'pointer' }}>
         <ImageListItemBar
           sx={{
             background:
@@ -42,7 +39,7 @@ const ListItem = ({ item }: ListItemProps) => {
           }
           position="bottom"
         />
-        <ImgThumb>
+        <ImgThumb onClick={() => navigate(`${item._id}`)}>
           <img
             src={`${host + item.picture}?w=248&fit=crop&auto=format`}
             alt={item.artist}
