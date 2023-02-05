@@ -1,4 +1,5 @@
 import React, { FC } from 'react';
+import { useLocation } from 'react-router-dom';
 import { Box, Grid, IconButton } from '@mui/material';
 import { Delete, Pause, PlayArrow } from '@mui/icons-material';
 import LibraryAddIcon from '@mui/icons-material/LibraryAdd';
@@ -15,10 +16,12 @@ import AddToAlbumForm from 'components/AddToAlbumForm';
 
 interface TrackItemProps {
   track: ITrack;
+  type: string;
 }
-const TrackItem: FC<TrackItemProps> = ({ track }) => {
+const TrackItem: FC<TrackItemProps> = ({ track, type }) => {
   const dispatch = useAppDispatch();
   const navigate = useNavigate();
+  const location = useLocation();
   const { active, pause, duration, currentTime } =
     useAppSelector(playerSelector);
   const { convertSec } = useTimeConvertor();
@@ -41,7 +44,11 @@ const TrackItem: FC<TrackItemProps> = ({ track }) => {
 
   return (
     <>
-      <StyledCard onClick={() => navigate(`/tracks/${track._id}`)}>
+      <StyledCard
+        onClick={() => {
+          navigate(`/tracks/${track._id}`, { state: { from: location } });
+        }}
+      >
         <IconButton onClick={onPlay}>
           {active?._id === track._id && !pause ? <Pause /> : <PlayArrow />}
         </IconButton>
@@ -65,23 +72,31 @@ const TrackItem: FC<TrackItemProps> = ({ track }) => {
             / {convertSec(duration).minutes}:{convertSec(duration).seconds}
           </div>
         )}
-        <Box sx={{ marginLeft: 'auto' }}>
-          <IconButton
-            style={{ marginLeft: 'auto' }}
-            onClick={onAddTrackToAlbum}
-          >
-            <LibraryAddIcon />
-          </IconButton>
-          <IconButton style={{ marginLeft: 'auto' }} onClick={onDeleteTrack}>
-            <Delete />
-          </IconButton>
-        </Box>
+        {type === 'tracks' ? (
+          <Box sx={{ marginLeft: 'auto' }}>
+            <IconButton
+              style={{ marginLeft: 'auto' }}
+              onClick={onAddTrackToAlbum}
+            >
+              <LibraryAddIcon />
+            </IconButton>
+            <IconButton style={{ marginLeft: 'auto' }} onClick={onDeleteTrack}>
+              <Delete />
+            </IconButton>
+          </Box>
+        ) : null}
       </StyledCard>
       <Modal
         isShown={isOpen}
         onCloseModal={closeModal}
-        modalContent={<AddToAlbumForm text="Album's name to add track" />}
-        headerText={'Some text'}
+        modalContent={
+          <AddToAlbumForm
+            text="Album name to add track"
+            trackId={track._id}
+            onCloseModal={closeModal}
+          />
+        }
+        headerText={'Add track to:'}
       />
     </>
   );

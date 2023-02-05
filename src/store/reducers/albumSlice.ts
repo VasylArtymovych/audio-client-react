@@ -4,11 +4,12 @@ import {
   fetchAlbums,
   fetchAlbumsByName,
   fetchAlbumTracks,
+  addTrackToAlbum,
 } from 'store/operations';
 
 const initialState: IAlbumsState = {
   albums: [],
-  albumTracks: [],
+  album: null,
   isLoading: 'idle',
   error: '',
 };
@@ -44,7 +45,12 @@ const albumSlice = createSlice({
       state.isLoading = 'succeeded';
       state.albums = action.payload;
     });
-    builder.addCase(fetchAlbumsByName.rejected, (state) => {
+    builder.addCase(fetchAlbumsByName.rejected, (state, action) => {
+      if (typeof action.payload === 'string') {
+        state.error = action.payload;
+      } else {
+        state.error = 'Error to add track to album';
+      }
       state.isLoading = 'failed';
     });
     // fetch albumTracks:
@@ -54,7 +60,7 @@ const albumSlice = createSlice({
 
     builder.addCase(fetchAlbumTracks.fulfilled, (state, action) => {
       state.isLoading = 'succeeded';
-      state.albumTracks = action.payload.tracks;
+      state.album = action.payload;
     });
 
     builder.addCase(fetchAlbumTracks.rejected, (state, action) => {
@@ -62,6 +68,24 @@ const albumSlice = createSlice({
         state.error = action.payload;
       } else {
         state.error = 'Error to fetch album tracks';
+      }
+      state.isLoading = 'failed';
+    });
+
+    // add track to album:
+    builder.addCase(addTrackToAlbum.pending, (state) => {
+      state.isLoading = 'pending';
+    });
+
+    builder.addCase(addTrackToAlbum.fulfilled, (state) => {
+      state.isLoading = 'succeeded';
+    });
+
+    builder.addCase(addTrackToAlbum.rejected, (state, action) => {
+      if (typeof action.payload === 'string') {
+        state.error = action.payload;
+      } else {
+        state.error = 'Error to add track toalbum';
       }
       state.isLoading = 'failed';
     });

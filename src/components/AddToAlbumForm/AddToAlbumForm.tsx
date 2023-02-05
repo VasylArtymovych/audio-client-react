@@ -1,15 +1,34 @@
 import { Button, TextField, Typography } from '@mui/material';
 import AddIcon from '@mui/icons-material/Add';
-import { useInput } from 'hooks';
+import { useAppDispatch, useInput } from 'hooks';
 import { FC } from 'react';
 import { StyledBox } from './AddToAlbumForm.styled';
+// import { albumsSelector } from 'store/selectors';
+import { addTrackToAlbum } from 'store/operations';
 
 interface AddToAlbumFormProps {
   text: string;
+  trackId: string;
+  onCloseModal: () => void;
 }
 
-const AddToAlbumForm: FC<AddToAlbumFormProps> = ({ text }) => {
+const AddToAlbumForm: FC<AddToAlbumFormProps> = ({
+  text,
+  trackId,
+  onCloseModal,
+}) => {
   const albumName = useInput('');
+  const dispatch = useAppDispatch();
+  // const { isLoading, error } = useAppSelector(albumsSelector);
+
+  const addTrackHandler = () => {
+    if (albumName.value) {
+      dispatch(addTrackToAlbum({ trackId, albumName: albumName.value }));
+      onCloseModal();
+    } else {
+      console.log('Enter name!');
+    }
+  };
 
   return (
     <StyledBox
@@ -39,7 +58,11 @@ const AddToAlbumForm: FC<AddToAlbumFormProps> = ({ text }) => {
         }}
       />
 
-      <Button variant="outlined" startIcon={<AddIcon />}>
+      <Button
+        variant="outlined"
+        startIcon={<AddIcon />}
+        onClick={addTrackHandler}
+      >
         Add
       </Button>
     </StyledBox>

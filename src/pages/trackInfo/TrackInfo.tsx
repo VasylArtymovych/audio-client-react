@@ -1,5 +1,5 @@
 import { FC, useEffect } from 'react';
-import { useNavigate, useParams } from 'react-router-dom';
+import { useNavigate, useParams, useLocation } from 'react-router-dom';
 import { Box, Button, Container, Grid, LinearProgress } from '@mui/material';
 import { useAppSelector, useAppDispatch } from 'hooks';
 import { tracksSelector } from 'store/selectors';
@@ -12,7 +12,9 @@ const TrackInfo: FC = () => {
   const { trackInfo: track, isLoading, error } = useAppSelector(tracksSelector);
   const dispatch = useAppDispatch();
   const navigate = useNavigate();
+  const location = useLocation();
   const { id } = useParams();
+  const returnPath = location.state?.from ?? '/tracks';
 
   useEffect(() => {
     id && dispatch(fetchTrackInfo(id));
@@ -21,7 +23,14 @@ const TrackInfo: FC = () => {
   return (
     <>
       <Container sx={{ p: '5rem 0' }}>
-        <Button onClick={() => navigate('/tracks')}>Back to list</Button>
+        <Button
+          onClick={() => {
+            navigate(returnPath);
+          }}
+        >
+          Back to list
+        </Button>
+
         {isLoading === 'pending' && (
           <Box sx={{ width: '100%' }}>
             <LinearProgress color="secondary" />

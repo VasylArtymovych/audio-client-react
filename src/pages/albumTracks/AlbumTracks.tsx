@@ -18,8 +18,9 @@ import TrackList from 'components/TrackList';
 const AlbumTracks = () => {
   const { albumId } = useParams();
   const dispatch = useAppDispatch();
-  const { albumTracks, isLoading, error } = useAppSelector(albumsSelector);
+  const { album, isLoading, error } = useAppSelector(albumsSelector);
   const navigate = useNavigate();
+
   useEffect(() => {
     albumId && dispatch(fetchAlbumTracks(albumId));
   }, [dispatch, albumId]);
@@ -29,17 +30,10 @@ const AlbumTracks = () => {
       <Button sx={sxBtn} onClick={() => navigate('/albums')}>
         Back to albums
       </Button>
-      <Grid
-        container
-        justifyContent="center"
-        // alignItems="center"
-        // direction="column"
-        sx={{ padding: '1rem 0 5rem' }}
-      >
+      <Grid container justifyContent="center" sx={{ padding: '1rem 0 5rem' }}>
         <Card sx={{ width: '80%', background: 'rgba(67, 40, 107, 0.8)' }}>
           {/** Traks list top */}
           <Box sx={{ padding: '1rem 1rem 0' }}>
-            {/* <Grid container justifyContent="space-between"> */}
             <Typography
               component="h3"
               sx={{
@@ -48,12 +42,8 @@ const AlbumTracks = () => {
                 fontFamily: 'fantasy',
               }}
             >
-              Album tracks
+              {`${album?.name} tracks:`}
             </Typography>
-            {/* <Button sx={sxBtn} onClick={() => navigate(routesPath.create)}>
-                Download
-              </Button> */}
-            {/* </Grid> */}
           </Box>
 
           {/** Loader */}
@@ -62,7 +52,9 @@ const AlbumTracks = () => {
               <LinearProgress />
             </Box>
           )}
-          {isLoading === 'succeeded' && <TrackList tracks={albumTracks} />}
+          {isLoading === 'succeeded' && album && (
+            <TrackList tracks={album?.tracks} type="album" />
+          )}
           {isLoading === 'failed' && <h2>{error}</h2>}
         </Card>
       </Grid>

@@ -52,14 +52,19 @@ export default function NavBar() {
           <img
             src={musicLogo}
             alt="music-logo"
-            style={{ width: '3rem', height: '3rem', color: 'white' }}
+            style={{
+              width: '3rem',
+              height: '3rem',
+              color: 'white',
+              cursor: 'pointer',
+            }}
+            onClick={onLogoClick}
           />
           <Typography
             variant="h6"
             noWrap
-            sx={{ flexGrow: 1, cursor: 'pointer', fontFamily: 'fantasy' }}
+            sx={{ flexGrow: 1, fontFamily: 'fantasy' }}
             component="div"
-            onClick={onLogoClick}
           >
             Audio storage
           </Typography>

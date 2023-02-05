@@ -1,5 +1,5 @@
 import { createAsyncThunk } from '@reduxjs/toolkit';
-import { IAlbum } from 'types/albums';
+import { IAddTrackData, IAlbum } from 'types/albums';
 import { albumApi } from 'services';
 
 export const fetchAlbums = createAsyncThunk<IAlbum[]>(
@@ -32,6 +32,21 @@ export const fetchAlbumTracks = createAsyncThunk(
     try {
       const album = await albumApi.getUlbumTracks(albumId);
       return album;
+    } catch (error: any) {
+      return rejectWithValue(error.message);
+    }
+  }
+);
+
+export const addTrackToAlbum = createAsyncThunk(
+  'albums/addTrackToAlbum',
+  async (data: IAddTrackData, { rejectWithValue }) => {
+    try {
+      const response = await albumApi.addTrackToAlbum(
+        data.trackId,
+        data.albumName
+      );
+      return response;
     } catch (error: any) {
       return rejectWithValue(error.message);
     }

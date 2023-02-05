@@ -10,7 +10,12 @@ export interface IAlbum {
 
 export interface IAlbumsState {
   albums: IAlbum[];
-  albumTracks: ITrack[];
+  album: IAlbum | null;
   isLoading: LoadingType;
   error: string;
+}
+
+export interface IAddTrackData {
+  trackId: string;
+  albumName: string;
 }

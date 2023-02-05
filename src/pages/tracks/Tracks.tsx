@@ -50,7 +50,9 @@ const TracksPage: FC = () => {
               <LinearProgress />
             </Box>
           )}
-          {isLoading === 'succeeded' && <TrackList tracks={tracks} />}
+          {isLoading === 'succeeded' && (
+            <TrackList tracks={tracks} type={'tracks'} />
+          )}
           {isLoading === 'failed' && <h2>{error}</h2>}
         </Card>
       </Grid>
@@ -58,4 +60,4 @@ const TracksPage: FC = () => {
   );
 };
 
-export default TracksPage;
+export default TracksPage; 
