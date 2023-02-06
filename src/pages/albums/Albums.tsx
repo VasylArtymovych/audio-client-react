@@ -10,7 +10,7 @@ import { useFetchAlbums } from 'hooks/getAlbums';
 import { useSelector } from 'react-redux';
 import { albumsSelector } from 'store/selectors';
 import AlbumList from 'components/AlbumList';
-import SearchTrack from 'components/SearchTrack';
+import SearchTrack from 'components/SearchField';
 import { useNavigate } from 'react-router-dom';
 import { routesPath } from 'config';
 

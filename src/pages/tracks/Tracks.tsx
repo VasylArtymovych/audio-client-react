@@ -9,7 +9,7 @@ import {
   Typography,
 } from '@mui/material';
 import TrackList from 'components/TrackList';
-import SearchTrack from 'components/SearchTrack';
+import SearchTrack from 'components/SearchField';
 import { routesPath } from 'config';
 import { useAppSelector, useFetchTracks } from 'hooks';
 import { tracksSelector } from 'store/selectors';

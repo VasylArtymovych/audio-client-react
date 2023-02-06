@@ -13,7 +13,6 @@ import { fetchAlbumTracks } from 'store/operations';
 import { Container, sxBtn } from './AlbumTracks.styled';
 import { albumsSelector } from 'store/selectors';
 import TrackList from 'components/TrackList';
-// import SearchTrack from 'components/SearchTrack';
 
 const AlbumTracks = () => {
   const { albumId } = useParams();
