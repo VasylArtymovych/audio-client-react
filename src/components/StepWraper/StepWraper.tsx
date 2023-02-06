@@ -1,14 +1,13 @@
-import { FC } from 'react';
+import { FC, ReactNode } from 'react';
 import { Card, Grid, Step, StepLabel, Stepper } from '@mui/material';
 
 interface StepWraperProps {
   activeStep: number;
-  children: React.ReactNode;
+  steps: string[];
+  children: ReactNode;
 }
 
-const steps = ['Treck information', 'Upload wrap image', 'Upload track'];
-
-const StepWraper: FC<StepWraperProps> = ({ activeStep, children }) => {
+const StepWraper: FC<StepWraperProps> = ({ activeStep, steps, children }) => {
   return (
     <>
       <Stepper activeStep={activeStep}>

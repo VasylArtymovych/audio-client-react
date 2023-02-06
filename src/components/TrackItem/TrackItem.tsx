@@ -1,6 +1,6 @@
 import React, { FC } from 'react';
 import { useLocation } from 'react-router-dom';
-import { Box, Grid, IconButton } from '@mui/material';
+import { Box, Grid, IconButton, Tooltip } from '@mui/material';
 import { Delete, Pause, PlayArrow } from '@mui/icons-material';
 import LibraryAddIcon from '@mui/icons-material/LibraryAdd';
 import { ITrack } from 'types/tracks';
@@ -74,15 +74,22 @@ const TrackItem: FC<TrackItemProps> = ({ track, type }) => {
         )}
         {type === 'tracks' ? (
           <Box sx={{ marginLeft: 'auto' }}>
-            <IconButton
-              style={{ marginLeft: 'auto' }}
-              onClick={onAddTrackToAlbum}
-            >
-              <LibraryAddIcon />
-            </IconButton>
-            <IconButton style={{ marginLeft: 'auto' }} onClick={onDeleteTrack}>
-              <Delete />
-            </IconButton>
+            <Tooltip title="Add to album" placement="top">
+              <IconButton
+                style={{ marginLeft: 'auto' }}
+                onClick={onAddTrackToAlbum}
+              >
+                <LibraryAddIcon />
+              </IconButton>
+            </Tooltip>
+            <Tooltip title="Delete" placement="top">
+              <IconButton
+                style={{ marginLeft: 'auto' }}
+                onClick={onDeleteTrack}
+              >
+                <Delete />
+              </IconButton>
+            </Tooltip>
           </Box>
         ) : null}
       </StyledCard>

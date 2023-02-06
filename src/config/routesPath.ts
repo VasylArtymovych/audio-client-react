@@ -4,5 +4,6 @@ export const routesPath = {
   albumTracks: '/albums/:albumId',
   tracks: '/tracks',
   trackInfo: '/tracks/:id',
-  create: '/create',
+  createTrack: '/create_track',
+  createAlbum: '/create_album',
 };

@@ -1,10 +1,11 @@
+import { FC } from 'react';
 import { Button, TextField, Typography } from '@mui/material';
 import AddIcon from '@mui/icons-material/Add';
 import { useAppDispatch, useInput } from 'hooks';
-import { FC } from 'react';
 import { StyledBox } from './AddToAlbumForm.styled';
-// import { albumsSelector } from 'store/selectors';
 import { addTrackToAlbum } from 'store/operations';
+import { toast } from 'react-toastify';
+import { toastConfig } from 'config';
 
 interface AddToAlbumFormProps {
   text: string;
@@ -19,14 +20,13 @@ const AddToAlbumForm: FC<AddToAlbumFormProps> = ({
 }) => {
   const albumName = useInput('');
   const dispatch = useAppDispatch();
-  // const { isLoading, error } = useAppSelector(albumsSelector);
 
   const addTrackHandler = () => {
     if (albumName.value) {
       dispatch(addTrackToAlbum({ trackId, albumName: albumName.value }));
       onCloseModal();
     } else {
-      console.log('Enter name!');
+      toast.error('Enter album name', toastConfig);
     }
   };
 

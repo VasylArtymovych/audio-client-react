@@ -11,10 +11,13 @@ import { useSelector } from 'react-redux';
 import { albumsSelector } from 'store/selectors';
 import AlbumList from 'components/AlbumList';
 import SearchTrack from 'components/SearchTrack';
+import { useNavigate } from 'react-router-dom';
+import { routesPath } from 'config';
 
 const Albums = () => {
   useFetchAlbums();
   const { albums, isLoading, error } = useSelector(albumsSelector);
+  const navigate = useNavigate();
 
   return (
     <>
@@ -37,7 +40,7 @@ const Albums = () => {
               >
                 Albums
               </Typography>
-              <Button onClick={() => console.log('click create album')}>
+              <Button onClick={() => navigate(routesPath.createAlbum)}>
                 Create album
               </Button>
             </Grid>

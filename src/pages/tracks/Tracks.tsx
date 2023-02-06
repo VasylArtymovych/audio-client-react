@@ -37,7 +37,10 @@ const TracksPage: FC = () => {
               >
                 Tracks list
               </Typography>
-              <Button sx={sxBtn} onClick={() => navigate(routesPath.create)}>
+              <Button
+                sx={sxBtn}
+                onClick={() => navigate(routesPath.createTrack)}
+              >
                 Download
               </Button>
             </Grid>
@@ -60,4 +63,4 @@ const TracksPage: FC = () => {
   );
 };
 
-export default TracksPage; 
+export default TracksPage;
