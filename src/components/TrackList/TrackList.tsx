@@ -8,7 +8,7 @@ interface TrackListProps {
   type: string;
 }
 
-const TrackList: FC<TrackListProps> = ({ tracks, type }) => {
+const TrackList: FC<TrackListProps> = ({ tracks = [], type }) => {
   return (
     <Grid container direction="column">
       <Box p={2}>

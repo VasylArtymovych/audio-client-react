@@ -52,12 +52,7 @@ const TrackItem: FC<TrackItemProps> = ({ track, type }) => {
         <IconButton onClick={onPlay}>
           {active?._id === track._id && !pause ? <Pause /> : <PlayArrow />}
         </IconButton>
-        <img
-          src={`http://localhost:4000/${track.picture}`}
-          alt="track logo"
-          width={70}
-          height={70}
-        />
+        <img src={track.picture} alt="track logo" width={70} height={70} />
         <Grid
           container
           direction="column"

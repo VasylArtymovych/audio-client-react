@@ -2,7 +2,7 @@ import axios from 'axios';
 import { IDeleteTrackResponse, ITrack } from 'types/tracks';
 
 export const getAllTracks = async (): Promise<ITrack[]> => {
-  return axios.get<ITrack[]>('tracks/').then(({ data }) => data);
+  return axios.get('tracks/').then(({ data }) => data.tracks);
 };
 
 export const getTrackById = async (id: string): Promise<ITrack> => {

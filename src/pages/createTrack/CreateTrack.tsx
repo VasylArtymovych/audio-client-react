@@ -47,7 +47,7 @@ const CreateTrack = () => {
         formData.append('audio', audio);
 
         axios
-          .post(host + 'tracks', formData)
+          .post(host + 'tracks/add', formData)
           .then(() => {
             navigate(routesPath.tracks, { replace: true });
           })

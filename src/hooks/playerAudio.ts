@@ -7,7 +7,6 @@ import {
   setCurrentTime,
   setDuration,
 } from 'store/reducers';
-import { host } from 'config';
 
 let audio: HTMLAudioElement = new Audio();
 
@@ -17,7 +16,7 @@ export const usePlayerAudio = () => {
 
   useEffect(() => {
     if (active) {
-      audio.src = host + active.audio;
+      audio.src = active.audio;
       audio.volume = 0.5;
       audio.onloadedmetadata = () => {
         dispatch(setDuration(Math.ceil(audio.duration)));

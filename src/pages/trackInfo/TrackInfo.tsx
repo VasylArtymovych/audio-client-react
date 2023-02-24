@@ -49,7 +49,7 @@ const TrackInfo: FC = () => {
               <div style={{ marginLeft: 30 }}>
                 <h2>Track - {track.name}</h2>
                 <h2>Artist - {track.artist}</h2>
-                <h2>Listeners - {track.listeners}</h2>
+                <h2>Listeners - {track.trackListeners}</h2>
               </div>
             </Grid>
             <h1>Track text</h1>
